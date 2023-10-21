@@ -1,0 +1,101 @@
+<html>
+<head>
+  <style>
+body {
+  background-image: url("static/green.jpg");
+}
+
+#search {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 30px;
+  font-size: 18px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #C5E5C5;
+}
+
+table {
+  margin: 0 auto;
+  width: 80%;
+  border-collapse: collapse;
+  background-color: transparent;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid black;
+}
+
+th {
+  background-color: darkgreen;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #EDF2F7;
+}
+
+tr:hover {
+  background-color: #D1D5DB;
+}
+  </style>
+  </head>
+<input type="text" id="search" placeholder="Search...">
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Food name</th>
+      <th>Category</th>
+      <th>Calories</th>
+      <th>Fat</th>
+      <th>Protein</th>
+      <th>Sugars</th>
+      <th>Iron</th>
+      <th>Calcium</th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+    {% for row in rows %}
+    <tr>
+      <td>{{ row['Descrip'] }}</td>
+      <td>{{ row['category'] }}</td>
+      <td>{{ row['Energy_kcal'] }}</td>
+      <td>{{ row['Fat_g'] }}</td>
+      <td>{{ row['Protein_g'] }}</td>
+      <td>{{ row['Sugar_g'] }}</td>
+      <td>{{ row['Iron_mg'] }}</td>
+      <td>{{ row['Calcium_mg'] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const tableBody = document.getElementById('table-body');
+  const rows = tableBody.getElementsByTagName('tr');
+
+  searchInput.addEventListener('keyup', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    for (let i = 0; i < rows.length; i++) {
+      const descrip = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+
+      if (descrip.includes(searchTerm)) {
+        rows[i].style.display = '';
+      } else {
+        rows[i].style.display = 'none';
+      }
+    }
+  });
+</script>
+
+<html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Food Prediction</title>
+  <style>
+		body {
+			background-image: url('static/green.jpg');
+			background-size: cover;
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+		h1 {
+			background-color: lightgreen;
+			color: white;
+			padding: 20px;
+		}
+		form {
+			margin-top: 50px;
+		}
+		input[type="submit"], label {
+			background-color: lightgreen;
+			color: white;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			margin-right: 10px;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+		}
+		li {
+			padding: 5px;
+			background-color: rgba(255,255,255,0.5);
+			margin-bottom: 10px;
+			border-radius: 5px;
+			box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+		}
+		.checkbox-section {
+			margin-top: 50px;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+		.filter-section {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Food Prediction</h1>
+	{% if result %}
+		<p>The predicted food class is: {{ result }}</p>
+	{% endif %}
+	<p>Values of the food in grams(g):</p>
+	<form action="/predict" method="POST">
+        <label for="input_1">Calories:</label>
+        <input type="number" id="input_1" name="input_1" step="0.01" required><br>
+        <br>
+        <br>
+    
+        <label for="input_2">Protein:</label>
+        <input type="number" id="input_2" name="input_2" step="0.01" required><br>
+        <br>
+        <br>
+    
+        <label for="input_3">Fibre:</label>
+        <input type="number" id="input_3" name="input_3" step="0.01" required><br>
+        <br>
+        <br>
+    
+        <input type="submit" value="Predict">
+    </form>
+
+    <form action="/musclegain" method="POST">
+      <label><input type="checkbox" name="vegetarian" value="vegetarian">Vegetarian</label>
+        <label><input type="checkbox" name="iron" value="iron">Iron</label>
+        <label><input type="checkbox" name="calcium" value="calcium">Calcium</label>
+        <label><input type="checkbox" name="anyfoods" value="anyfoods">Any</label>
+        <input type="submit" value="Muscle gain">
+    </form>
+    
+      {% if musclegainfoods %}
+      <h2>Filtered Foods</h2>
+      <p>Here are 5 random foods from the "Muscle_Gain" category:</p>
+      <ul>
+        {% for item in musclegainfoods.split('\n') %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <form action="/weightgain" method="POST">
+        <label><input type="checkbox" name="vegetarian" value="vegetarian">Vegetarian</label>
+        <label><input type="checkbox" name="iron" value="iron">Iron</label>
+        <label><input type="checkbox" name="calcium" value="calcium">Calcium</label>
+        <label><input type="checkbox" name="anyfoods" value="anyfoods">Any</label>
+        <input type="submit" value="Weight gain">
+    </form>
+    
+      {% if weightgainfoods %}
+      <h2>Filtered Foods</h2>
+      <p>Here are 5 foods from the "Muscle Gain" category:</p>
+      <ul>
+        {% for item in weightgainfoods.split('\n') %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <form action="/weightloss" method="POST">
+
+        <label><input type="checkbox" name="vegetarian" value="vegetarian">Vegetarian</label>
+        <label><input type="checkbox" name="iron" value="iron">Iron</label>
+        <label><input type="checkbox" name="calcium" value="calcium">Calcium</label>
+        <label><input type="checkbox" name="anyfoods" value="anyfoods">Any</label>
+        <input type="submit" value="Weight loss">
+    </form>
+    
+      {% if weightlossfoods %}
+      <h2>Filtered Foods</h2>
+      <p>Here are 5 random foods from the "Muscle_Gain" category:</p>
+      <ul>
+        {% for item in weightlossfoods.split('\n') %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <form method="post" action="{{ url_for('search') }}">
+        <button type="submit">USDA Food data</button>
+    </form>
+</body>
+</html>
