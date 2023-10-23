@@ -3,6 +3,9 @@
 ## Overview
 The Diet Recommendation System is a web-based application built with Flask, aimed at providing dietary recommendations based on user-specific macro-nutrient requirements. It includes a pre-trained machine learning model for making personalized food recommendations, helping users achieve their health and fitness goals.
 
+## Sample Screenshots
+![Output](./diet_output.png)
+
 ## Features
 - Predicts diet recommendations for users based on their input data.
 - Offers recommendations for muscle gain, weight gain, weight loss, and general diets.
